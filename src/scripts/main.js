@@ -16,49 +16,49 @@ function calendarTable(year, month, element) {
 
 const createHeader = () => {
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-  const thead = document.createElement('thead');
+  const tableHeader = document.createElement('thead');
 
   days.forEach(day => {
-    const th = document.createElement('th');
+    const tableHeadings = document.createElement('th');
 
-    th.textContent = day;
-    thead.append(th);
+    tableHeadings.textContent = day;
+    tableHeader.append(tableHeadings);
   });
 
-  return thead;
+  return tableHeader;
 };
 
-const createBody = (day, start) => {
-  const tbody = document.createElement('tbody');
+const createBody = (daysInMonth, startOfMonth) => {
+  const tableBody = document.createElement('tbody');
   let canPopulate = false;
-  let counter = start;
-  const weeks = Math.ceil((day + start) / 7);
+  let dayCounter = startOfMonth;
+  const weeks = Math.ceil((daysInMonth + startOfMonth) / 7);
 
   for (let i = 0; i < weeks; i++) {
     const row = document.createElement('tr');
 
-    tbody.append(row);
+    tableBody.append(row);
 
     for (let j = 0; j < 7; j++) {
-      const td = document.createElement('td');
+      const tableData = document.createElement('td');
 
-      if (j === counter) {
+      if (j === dayCounter) {
         canPopulate = true;
       }
 
       if (canPopulate) {
-        td.innerText = counter - start + 1;
-        counter++;
+        tableData.innerText = dayCounter - startOfMonth + 1;
+        dayCounter++;
       }
 
-      if (counter - start === day) {
+      if (dayCounter - startOfMonth === daysInMonth) {
         canPopulate = false;
       }
-      row.append(td);
+      row.append(tableData);
     }
   }
 
-  return tbody;
+  return tableBody;
 };
 
-calendarTable(2020, 1, calendar);
+calendarTable(2020, 6, calendar);
